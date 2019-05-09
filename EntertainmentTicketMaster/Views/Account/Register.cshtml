@@ -1,0 +1,70 @@
+﻿@model EntertainmentTicketMaster.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+<style type="text/css">
+    div.body-content div, div.body-content {
+        color: gray;
+    }
+
+    #body.home div div, #body.home div div:first-child {
+        float: left;
+        /*width: 960px;*/
+    }
+     .form-control {
+        min-width: 250px;
+        float: left;
+    }
+    .control-label {
+        min-width: 150px;
+        text-align: right;
+        float: left;
+    }
+    div.validation-summary-errors ul li {
+        color: #B94A48;
+    }
+</style>
+
+<div class="body-content" style="text-align:left !important; width:100% !important;">
+    <h2>@ViewBag.Title.</h2>
+
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <h4>Create a new account.</h4>
+        <hr />
+        @Html.ValidationSummary()
+        <div class="form-group">
+            @Html.LabelFor(m => m.UserName, new { @class = "col-lg-3 control-label" })<span style="float:left;">&nbsp;</span>
+            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control textbox col-lg-9" })
+			@Html.ValidationMessageFor(m => m.UserName,"")
+            <div>&nbsp;</div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email, new { @class = "col-lg-3 control-label" })<span style="float:left;">&nbsp;</span>
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control textbox col-lg-9" })
+			@Html.ValidationMessageFor(m => m.Email,"")
+            <div>&nbsp;</div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Password, new { @class = "col-lg-3 control-label" })<span style="float:left;">&nbsp;</span>
+                         @Html.PasswordFor(m => m.Password, new { @class = "form-control textbox col-lg-9" })
+			@Html.ValidationMessageFor(m => m.Password,"")
+            <div>&nbsp;</div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-lg-3 control-label" })<span style="float:left;">&nbsp;</span>
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control textbox col-lg-9" })
+			@Html.ValidationMessageFor(m => m.ConfirmPassword,"")
+            <div>&nbsp;</div>
+        </div>
+        <div class="form-group">
+            <div>&nbsp;</div>
+            <input type="submit" class="btn btn-default" value="Register" />
+        </div>
+    }
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+    </div>

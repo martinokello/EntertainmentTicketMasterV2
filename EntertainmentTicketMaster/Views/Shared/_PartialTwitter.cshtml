@@ -1,0 +1,61 @@
+﻿<script type="text/javascript">
+    $(document).ready(function () {
+        var date = new Date();
+        var dateStr = date.getDay() + "/" + date.getFullYear(); 
+        $('span.date').html(dateStr);
+        $.ajax({
+            url:"@System.Configuration.ConfigurationManager.AppSettings["SiteRoot2"]"+"/api/SocialMedia/GetTwitterFeeds",
+			beforeSend: function(req)
+			{
+				req.setRequestHeader('Access-Control-Allow-Headers','x-requested-with');
+			},
+            type: "GET",
+            dataType: "json",
+            success: function (data, textStatus, jqXHR) {
+                $.each(data, function (index, value) {
+                    if (index == 0) {
+                        var firstli = $('ul#twitterProfileFeeds li').find('p#firstTweet');
+                        var firstDuration = $('ul#twitterProfileFeeds a#firstDuration');
+                        firstli.html('<a href="' + value.GroupUrl + '">' + value.GroupDescription + '</a>');
+                        firstDuration.html(value.Duration);
+                        firstDuration.attr('href', value.GroupUrl);
+                    } else {
+                        var secondli = $('ul#twitterProfileFeeds li').find('p#secondTweet');
+                        var secondDuration = $('ul#twitterProfileFeeds a#secondDuration');
+                        secondli.html(value.GroupDescription);
+                        secondli.html('<a href="' + value.GroupUrl + '">' + value.GroupDescription + '</a>');
+                        secondDuration.html(value.Duration);
+                        secondDuration.attr('href', value.GroupUrl);
+                    }
+                });
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                debugger;
+            }
+        });
+    });
+</script>
+<style type="text/css">
+    ul#twitterProfileFeeds{ color:black !important;}
+</style>
+<span>Recent Tweets</span>
+<ul id="twitterProfileFeeds">
+    <!-- Excerpt -->
+    <li class="box excerpt">
+        <a href="#" class="image left"><img src="images/pic04.jpg" alt="" /></a>
+        <p id="firstTweet">
+            <header>
+                <h3><a id="firstDuration" href="#">Repairing a hyperspace window</a></h3>
+            </header>
+        </p>
+    </li>
+
+    <!-- Excerpt -->
+    <li class="box excerpt">
+        <a href="#" class="image left"><img src="images/pic05.jpg" alt="" /></a>
+        <p id="secondTweet">
+            <header>
+                <h3><a id="secondDuration" href="#">Repairing a hyperspace window</a></h3>
+            </header>
+    </li>
+</ul>

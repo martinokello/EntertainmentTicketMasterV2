@@ -1,0 +1,491 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8" />
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <title>@ViewBag.Title - Entertainment Ticket Master</title>
+    <link rel="stylesheet" href="@Url.Content("~/css/bootstrap.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/assets/css/main.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/jquery-ui-1.10.3/themes/base/jquery-ui.css")" type="text/css" media="screen" />
+    <script src="@Url.Content("~/Scripts/jquery-1.10.2.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")"></script>
+    <script src="@Url.Content("~/jquery-ui-1.10.3/ui/jquery-ui.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/chart.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/assets/js/jquery.dropotron.min.js")"></script>
+    <script src="@Url.Content("~/assets/js/browser.min.js")"></script>
+    <script src="@Url.Content("~/assets/js/breakpoints.min.js")"></script>
+    <script src="@Url.Content("~/assets/js/util.js")"></script>
+    <script src='@Url.Content("~/assets/js/main.js")'></script>
+    <script src="@Url.Content("~/js/bootstrap.js")"></script>
+    <script type="text/javascript" src="https://w.sharethis.com/button/buttons.js"></script>
+    <script type="text/javascript">stLight.options({ publisher: "7253900c-b2c5-475f-a54d-05a12e8b60c2" });</script>
+    <style type="text/css">
+        div#header a.selected {
+            color: #AF0000;
+        }
+
+        div#header a {
+            color: white;
+        }
+
+        a {
+            color: #ae6662;
+            text-decoration: none;
+        }
+
+        div#header ul ul a {
+            color: black !important;
+        }
+
+        a {
+            color: #ae6662;
+            text-decoration: none;
+        }
+
+        div.validation-summary-errors ul li {
+            min-height: auto;
+            padding: 0;
+            width: auto;
+        }
+
+        input[type="button"], input[type="submit"] {
+            background-color: #515459;
+            background-image: linear-gradient(to bottom, #515459, #3b3c40);
+            border: 1px solid #393b3e;
+            border-radius: 23px;
+            box-shadow: 0 1px 5px #737373;
+            color: #8c8c8c;
+            display: inline-block;
+            font-family: arial,helvetica,sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 10px 20px;
+            text-decoration: none;
+            text-shadow: 0 1px 0 rgba(10, 10, 10, 0.5);
+        }
+
+            input[type="button"]:hover, input[type="submit"]:hover {
+                background-color: #515459;
+                color: white;
+                background-image: linear-gradient(to bottom, #515459, #b8b8b8);
+                border: 1px solid #393b3e;
+            }
+
+        .navbar > ul > li {
+            margin: 5px;
+            padding: 0;
+            width: auto;
+            float: left;
+            font-weight: bolder;
+            font-size: medium;
+            color: black !important;
+            text-align: left;
+            color: white !important;
+            padding:0 5px !important;
+        }
+            .navbar > ul > li.dropdown{
+                margin-top:12px !important;
+            }
+                .navbar > ul > li.dropdown > ul {
+                    margin-top: -5px !important;
+                }
+                div.navbar {
+                    text-align: center;
+                    border-radius: 5px;
+                }
+        .navbar > ul li:hover {
+            background-color: silver !important;
+        }
+        div.background-colors {
+            background-color: black !important;
+            text-align: left !important;
+            color: white !important;
+        }
+    </style>
+    <script type="text/javascript">
+		function validateEmail(email) {
+			var filter = /^([a-zA-Z0-9_\.\-])+\@@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			return filter.test(email);
+		}
+        $(document).ready(function () {
+            $('div.navbar > ul > li').hover(function () {
+                let ul = $(this).find('ul.dropdown-menu');
+                ul.css('display', 'block');
+
+            }, function () {
+                let ul = $(this).find('ul.dropdown-menu');
+                ul.css('display', 'none');
+                });
+            let lis = $('div.navbar > ul > li > ul.dropdown-menu > li');
+
+            lis.each(function (index, elm) {
+                $(elm).hover(function () { $(this).css('background-color', 'silver'); }, function () { $(this).css('background-color', 'white'); });
+
+            });
+
+            $('div#myHeader ul>li').each(function () {
+                if ($(this).children('a').html() == '@ViewBag.Title') {
+                    $(this).children('a').addClass('selected');
+                } else {
+                    $(this).children('a').remove('class', 'selected');
+                    $(this).children('a').css('color', 'black');
+                }
+            });
+
+            $('#SubmitEmail').click(function () {
+                var email = $('#EmailAddress').val();
+				if(!validateEmail(email))
+				{
+					alert('This is not a valid email address. Please check the format');
+					return false;
+				}
+                var username = '@Guid.NewGuid().ToString().Substring(0,10)';
+                var user = {
+                    UserName: username,
+                    Password: 'anonymous',
+                    Email: email,
+                    ConfirmPassword: 'anonymous'
+                };
+                var userDetails = JSON.stringify(user);
+
+                $.ajax({
+                    url: '@System.Configuration.ConfigurationManager.AppSettings["SiteRoot2"]'+'/api/EmailList/AddUserToMailList',
+                    type: "POST",
+                    contentType: "application/json",
+                    data: userDetails,
+                    success: function (data, textStatus, jqXHR) {
+						alert('Your email: '+email+' has been successfully added to the mailing list');
+                    },
+                    error: function (jqXHR, error, errorThrown) {
+						alert('Your email: '+email+' failed addition to mail list, server error: email may already exist!!');
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+    @{
+        var isAuthenticated = User.Identity.IsAuthenticated;
+        var isAdmin = User.Identity.Name.Equals("administrator", StringComparison.OrdinalIgnoreCase);
+        var styleAuthenticated = string.Empty;
+        var styleNotAuthenticated = string.Empty;
+        if (isAuthenticated)
+        {
+            styleAuthenticated = @"display:inline;";
+            styleNotAuthenticated = @"display:none;";
+        }
+        else
+        {
+            styleAuthenticated = @"display:none;";
+            styleNotAuthenticated = @"display:inline;";
+        }
+    }
+
+</head>
+<body class="homepage is-preload">
+    <div id="page-wrapper">
+
+        <!-- Header -->
+        <div id="header-wrapper">
+            <div class="container">
+                <!-- Header -->
+                <div class="navbar navbar-expand-lg navbar-light bg-light" id="myHeader">
+                    <ul class="nav horizontal">
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index","Home")">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="dropdown-toggle" href="@Url.Action("Events", "Tickets")">Events</a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Events", "Tickets")">Now Showing</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("EventComingSoon", "Tickets")">Comming Soon</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("TicketsInfo","Tickets")">Ticket Info</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("BookTickets", "Tickets")">Book Tickets</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Contact","Home")">Contact Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("About","Home")">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Blog","Blogs")">Blog</a>
+                        </li>
+                        <li style="@styleNotAuthenticated" class="nav-item dropdown">
+                            <a class="dropdown-toggle" href="@Url.Action("Login","Account")">Login</a>
+                            <ul class="dropdown-menu" style="width: 120px;">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("ResetPassword", "Account")">Reset Password</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Register", "Account")">Register</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li style="@styleAuthenticated" class="nav-item dropdown">
+                            <a class="dropdown-toggle" href="@Url.Action("LogOff", "Account")">Logout</a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("ChangeEmail","Account")">Change Email</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("ChangePassword","Account")">New Password</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p class="social-network" style="height: auto;">
+                        <div style="margin-top: 10px; margin-right: 20px;margin-bottom:20px;padding:10px;">
+                            <span class='st_facebook_hcount' displaytext='Facebook'></span><span class='st_twitter_hcount' displaytext='Tweet'></span><span class='st_linkedin_hcount' displaytext='LinkedIn'>
+                            </span><span class='st_email_hcount' displaytext='Email'></span>
+                            <span style="color:silver;font-weight: bolder;">
+                                &nbsp;
+                                @{
+                                    var display = string.Empty;
+                                    if (isAuthenticated)
+                                    {
+                                        display = "Logged in as: " + User.Identity.Name;
+                                    }
+                                }
+                                @display
+                            </span>
+                            <span style="color:silver;font-weight: bolder;">
+                                &nbsp;
+                                @{
+                                    if (isAdmin)
+                                    {
+                                        <a href="@Url.Action("Index","Administration")">Site Administration </a>
+                                    }
+                                }
+                            </span>
+
+                        </div>
+                        <div class="clearfix">
+                            <br />
+                        </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Wrapper -->
+    <div id="main-wrapper">
+        <div class="background-colors">
+            <div class="inner">
+
+                <!-- Feature 1 -->
+                <section class="container box feature1">
+                    <div class="row">
+                        <div class="col-12">
+                            <header class="first major">
+                                <h2>The Entertainment Ticket Master, Brought To You By &copy; <a href="https://www.martinlayooinc.co.uk">MartinLayooInc Software House.</a></h2>
+                                <p>Feel Free to explore the Administrative area if you are an Administrator - link below. </strong> ...</p>
+                            </header>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <section>
+                                <a href='@Url.Content("~/Home/Contact")' class="image featured"><img src="images/pic01.jpg" alt="" /></a>
+                                <header class="second icon fa-user">
+                                    <h3>Contact Team...</h3>
+                                    <p>Contact Us</p>
+                                </header>
+                            </section>
+                        </div>
+                        <div class="col-lg-4">
+                            <section>
+                                <a href='Url.Content("~/Administration/Index")' class="image featured"><img src="images/pic02.jpg" alt="" /></a>
+                                <header class="second icon fa-cog">
+                                    <h3>Ticket Buy Stats</h3>
+                                    <p>Statistics Here</p>
+                                </header>
+                            </section>
+                        </div>
+                        <div class="col-lg-4">
+                            <section>
+                                <a href='Url.Content("~/Administration/Index")' class="image featured"><img src="images/pic03.jpg" alt="" /></a>
+                                <header class="second icon fa-bar-chart-o">
+                                    <h3>Administration Here</h3>
+                                    <p>Administration Portal</p>
+                                </header>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-top:20px !important;">
+                        @RenderBody()
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="wrapper style3">
+            <div class="inner">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-8 col-12-medium">
+
+                            <!-- Article list -->
+                            <section class="box article-list">
+                                <h2 class="icon fa-file-text-o">Recent Tweets</h2>
+
+                                @{ Html.RenderPartial("_PartialTwitter");}
+                            </section>
+                        </div>
+                        <div class="col-4 col-12-medium">
+
+                            <!-- Spotlight -->
+                            <section class="box spotlight">
+                                <h2 class="icon fa-file-text-o">MartinLayooInc Software House Presents...</h2>
+                                <article>
+                                    <a href="#" class="image featured"><img src="images/pic07.jpg" alt=""></a>
+                                    <header>
+                                        <h3><a href="https://wwww.martinlayooinc.co.uk">MartinLayooInc &copy;</a></h3>
+                                        <p>Structural Engineering &amp; Encryption Software.</p>
+                                    </header>
+                                    <p>
+                                        &nbsp;
+                                    </p>
+                                    <p>
+                                        &nbsp;
+                                    </p>
+                                    <footer>
+                                        <a href="@Url.Content("~/Home/About")" class="button alt icon fa-file-o">About Us</a>
+                                    </footer>
+                                </article>
+                            </section>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Wrapper -->
+    <div id="footer-wrapper">
+        <footer id="footer" class="container">
+            <div class="row">
+                <div class="col-3 col-6-medium col-12-small">
+
+                    <!-- Links -->
+                    <section>
+                        <h2>Filler Links</h2>
+                        <ul class="divided">
+                            <li><a href="#">Quam turpis feugiat dolor</a></li>
+                            <li><a href="#">Amet ornare in hendrerit </a></li>
+                            <li><a href="#">Semper mod quisturpis nisi</a></li>
+                            <li><a href="#">Consequat etiam phasellus</a></li>
+                            <li><a href="#">Amet turpis, feugiat et</a></li>
+                            <li><a href="#">Ornare hendrerit lectus</a></li>
+                            <li><a href="#">Semper mod quis et dolore</a></li>
+                            <li><a href="#">Amet ornare in hendrerit</a></li>
+                            <li><a href="#">Consequat lorem phasellus</a></li>
+                            <li><a href="#">Amet turpis, feugiat amet</a></li>
+                            <li><a href="#">Semper mod quisturpis</a></li>
+                        </ul>
+                    </section>
+
+                </div>
+                <div class="col-3 col-6-medium col-12-small">
+
+                    <!-- Links -->
+                    <section>
+                        <h2>More Filler</h2>
+                        <ul class="divided">
+                            <li><a href="#">Quam turpis feugiat dolor</a></li>
+                            <li><a href="#">Amet ornare in in lectus</a></li>
+                            <li><a href="#">Semper mod sed tempus nisi</a></li>
+                            <li><a href="#">Consequat etiam phasellus</a></li>
+                        </ul>
+                    </section>
+
+                    <!-- Links -->
+                    <section>
+                        <h2>Even More Filler</h2>
+                        <ul class="divided">
+                            <li><a href="#">Quam turpis feugiat dolor</a></li>
+                            <li><a href="#">Amet ornare hendrerit lectus</a></li>
+                            <li><a href="#">Semper quisturpis nisi</a></li>
+                            <li><a href="#">Consequat lorem phasellus</a></li>
+                        </ul>
+                    </section>
+
+                </div>
+                <div class="col-6 col-12-medium imp-medium">
+
+                    <!-- About -->
+                    <section>
+                        <h2><strong>ZeroFour</strong> by HTML5 UP</h2>
+                        <p>
+                            Hi! This is <strong>ZeroFour</strong>, a free, fully responsive HTML5 site
+                            template by <a href="http://twitter.com/ajlkn">AJ</a> for <a href="http://html5up.net/">HTML5 UP</a>.
+                            It's <a href="http://html5up.net/license/">Creative Commons Attribution</a>
+                            licensed so use it for any personal or commercial project (just credit us
+                            for the design!).
+                        </p>
+                        <a href="#" class="button alt icon fa-arrow-circle-right">Learn More</a>
+                    </section>
+
+                    <!-- Contact -->
+                    <section>
+                        <h2>Get in touch</h2>
+                        <div>
+                            <div class="row">
+                                <div class="col-6 col-12-small">
+                                    <dl class="contact">
+                                        <dt>Twitter</dt>
+                                        <dd><a href="#">martinlayooinc.co.uk</a></dd>
+                                        <dt>Facebook</dt>
+                                        <dd><a href="#">facebook.com/untitled</a></dd>
+                                        <dt>WWW</dt>
+                                        <dd><a href="#">untitled.tld</a></dd>
+                                        <dt>Email</dt>
+                                        <dd><a href="#">user@untitled.tld</a></dd>
+                                    </dl>
+                                </div>
+                                <div class="col-6 col-12-small">
+                                    <dl class="contact">
+                                        <dt>Address</dt>
+                                        <dd>
+                                            1234 Fictional Rd<br />
+                                            Nashville, TN 00000-0000<br />
+                                            USA
+                                        </dd>
+                                        <dt>Phone</dt>
+                                        <dd>(000) 000-0000</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+                <div class="col-12">
+                    <div id="copyright">
+                        <ul class="menu">
+                            <li>&copy; Untitled. All rights reserved</li>
+                            <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    </div>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

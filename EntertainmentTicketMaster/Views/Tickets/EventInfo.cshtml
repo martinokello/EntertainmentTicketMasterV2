@@ -1,0 +1,60 @@
+﻿@model EntertainmentTicketMaster.Models.EventViewModel
+@{
+    ViewBag.Title = "EventInfo";
+}
+
+
+<style type="text/css">
+    #body.home div div:first-child ul li:first-child {
+        width: 238px;
+    }
+
+    #body.home div div:first-child ul li {
+        border-right: 1px solid #4f4f4f;
+        min-height: 287px;
+        padding: 0;
+        width: 239px;
+    }
+
+    div.body-content div, div.body-content {
+        color: gray;
+    }
+
+    #body.home div div, #body.home div div:first-child {
+        float: left;
+        width: 960px;
+    }
+
+    .form-control {
+        width: 250px;
+        float: left;
+    }
+
+    .control-label {
+        width: 150px;
+        text-align: right;
+        float: left;
+    }
+
+    #body.home div div:first-child ul li {
+        width: auto;
+    }
+</style>
+
+<div class="body-content" id="body-content" style="text-align:left !important; width:100% !important;">
+    <div>
+        <h2>Shows</h2>
+        <ul>
+            <li>
+                <div>
+                    <p>Event Name: @Model.EventName</p>
+                    <p>Event ID: @Model.EventId</p>
+                    <p>Location: @Model.Location</p>
+                    <p>Event Date: @Model.EventDate</p>
+                    <p>@Model.EventDescription</p>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+</div>

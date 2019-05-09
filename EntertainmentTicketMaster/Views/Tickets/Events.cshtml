@@ -1,0 +1,98 @@
+﻿@model IEnumerable<EntertainmentTicketMaster.Models.EventViewModel>
+
+@{
+    ViewBag.Title = "Events";
+}
+
+<style type="text/css">
+    #body.home div div:first-child ul li:first-child {
+        width: 238px;
+    }
+
+    #body.home div div:first-child ul li {
+        border-right: 1px solid #4f4f4f;
+        min-height: 287px;
+        padding: 0;
+        width: 239px;
+    }
+
+    div.body-content div, div.body-content {
+        color: gray;
+    }
+
+    #body.home div div, #body.home div div:first-child {
+        float: left;
+        width: 960px;
+    }
+
+    .alignVerticalImage {
+        vertical-align: central;
+        height: 95%;
+    }
+
+    .form-control {
+        width: 250px;
+        float: left;
+    }
+
+    .control-label {
+        width: 150px;
+        text-align: right;
+        float: left;
+    }
+
+    a {
+        color: #ae6662;
+    }
+
+    div#eventsContent ul li p a img {
+        border-bottom: 1px solid #4F4F4F;
+    }
+
+    div#eventsContent ul li p a img {
+        border-top: 1px solid #4F4F4F;
+    }
+
+    div#eventsContent ul li p a img {
+        border-right: 1px solid #4F4F4F;
+    }
+
+    div#eventsContent ul li p a img {
+        border-left: 1px solid #4F4F4F;
+    }
+
+    div#eventsContent img {
+        margin-top: 22%;
+    }
+</style>
+@{
+    var index = 1;
+}
+
+<div class="body-content" id="body-content" style="text-align:left !important; width:100% !important;">
+    <h2>Shows</h2>
+    <div id="eventsContent">
+        <div style="margin-top:10px !important;">
+            <div class="row">
+                @foreach (var evnt in Model)
+                {
+                    <div style="border: gray solid 1px;" class="col-lg-4">
+                        <p style="text-align: center; ">
+                            <a style="color: #ae6662;" href="@Url.Action("EventInfo","Tickets", new {@id = evnt.EventId})" onmouseover="this.style.color='orange';" onmouseout="this.style.color='#ae6662';">
+                                @evnt.EventName<br />
+                                <img class="alignVerticalImage" src="@Url.Content("~/images/Diamond"+index+".jpg")" />
+                            </a>
+                        </p>
+                        <p>@evnt.EventDescription</p>
+                    </div>
+                    index++;
+                    if (index % 5 == 0)
+                    {
+                        index = 1;
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

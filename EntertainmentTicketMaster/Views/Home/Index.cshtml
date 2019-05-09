@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+
+<div class="body-content" id="body-content" style="text-align:left !important; width:100% !important;">
+    <div class="row">
+        <div class="col-lg-5">
+            <a href="@Url.Action("Index","Home")"><img src="@Url.Content("~/images/baby-with-dog.jpg")" alt=""></a>
+            <h2><a href="@Url.Action("Index","Home")">Movie Title</a></h2>
+            <p>
+                This website template has been designed by Free Website Templates for you, for free. You can replace all this text with your own text. You can remove any link to our website from this website template, you're free to use this website template without linking back to us. If you're having problems editing this website template, then don't hesitate to ask for help on the Forums.
+            </p>
+            <a href="@Url.Action("Index","Home")">Read More</a>
+        </div>
+        <div class="col-lg-2">
+            <h3>Movie Title</h3>
+            <span>Cinema 2</span> <a href="@Url.Action("Index","Home")"><img src="@Url.Content("~/images/surfer.jpg")" alt=""></a>
+        </div>
+        <div class="col-lg-2">
+            <h3>Movie Title</h3>
+            <span>Cinema 3</span> <a href="@Url.Action("Index","Home")"><img src="@Url.Content("~/images/soldiers.jpg")" alt=""></a>
+        </div>
+        <div class="col-lg-2">
+            <h3>Movie Title</h3>
+            <span>Cinema 4</span> <a href="@Url.Action("Index","Home")"><img src="@Url.Content("~/images/ballet-dancer.jpg")" alt=""></a>
+        </div>
+
+    </div>
+</div>
+<style type="text/css">
+    #body.home div div:first-child {
+        border-bottom: medium none;
+        border-right: 1px solid #4f4f4f;
+        float: none;
+    }
+
+    div:first-child ul#ulfirst li {
+        border-top: 1px solid #4f4f4f;
+        float: left;
+        width: auto;
+    }
+</style>
