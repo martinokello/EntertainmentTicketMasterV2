@@ -21,8 +21,7 @@
     <script src="@Url.Content("~/assets/js/util.js")"></script>
     <script src='@Url.Content("~/assets/js/main.js")'></script>
     <script src="@Url.Content("~/js/bootstrap.js")"></script>
-    <script type="text/javascript" src="https://w.sharethis.com/button/buttons.js"></script>
-    <script type="text/javascript">stLight.options({ publisher: "7253900c-b2c5-475f-a54d-05a12e8b60c2" });</script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNPbLu2PRqU9dWbtw6WE5qijg9o7B3FDQ&sensor=false" type="text/javascript"></script>
     <style type="text/css">
         div#header a.selected {
             color: #AF0000;
@@ -85,21 +84,26 @@
             color: black !important;
             text-align: left;
             color: white !important;
-            padding:0 5px !important;
+            padding: 0 5px !important;
         }
-            .navbar > ul > li.dropdown{
-                margin-top:12px !important;
+
+            .navbar > ul > li.dropdown {
+                margin-top: 12px !important;
             }
+
                 .navbar > ul > li.dropdown > ul {
                     margin-top: -5px !important;
                 }
-                div.navbar {
-                    text-align: center;
-                    border-radius: 5px;
-                }
+
+        div.navbar {
+            text-align: center;
+            border-radius: 5px;
+        }
+
         .navbar > ul li:hover {
             background-color: silver !important;
         }
+
         div.background-colors {
             background-color: black !important;
             text-align: left !important;
@@ -299,31 +303,40 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-4">
-                            <section>
-                                <a href='@Url.Content("~/Home/Contact")' class="image featured"><img src="images/pic01.jpg" alt="" /></a>
-                                <header class="second icon fa-user">
-                                    <h3>Contact Team...</h3>
-                                    <p>Contact Us</p>
-                                </header>
-                            </section>
+                            <a href='@Url.Content("~/Home/Contact")' class="image featured">
+                                <section>
+                                    <img src="images/pic01.jpg" alt="" />
+
+                                    <header class="second icon fa-user">
+                                        <h3>Contact Team...</h3>
+                                        <p>Contact Us</p>
+                                    </header>
+                                </section>
+                            </a>                        
                         </div>
                         <div class="col-lg-4">
-                            <section>
-                                <a href='Url.Content("~/Administration/Index")' class="image featured"><img src="images/pic02.jpg" alt="" /></a>
-                                <header class="second icon fa-cog">
-                                    <h3>Ticket Buy Stats</h3>
-                                    <p>Statistics Here</p>
-                                </header>
-                            </section>
+                            <a href='@Url.Content("~/Administration/Index")' class="image featured">
+                                <section>
+                                    <img src="images/pic02.jpg" alt="" />
+
+                                    <header class="second icon fa-cog">
+                                        <h3>Ticket Buy Stats</h3>
+                                        <p>Statistics Here</p>
+                                    </header>
+                                </section>
+                            </a>
                         </div>
                         <div class="col-lg-4">
-                            <section>
-                                <a href='Url.Content("~/Administration/Index")' class="image featured"><img src="images/pic03.jpg" alt="" /></a>
-                                <header class="second icon fa-bar-chart-o">
-                                    <h3>Administration Here</h3>
-                                    <p>Administration Portal</p>
-                                </header>
-                            </section>
+                            <a href='@Url.Content("~/Administration/Index")' class="image featured">
+                                <section>
+                                    <img src="images/pic03.jpg" alt="" />
+
+                                    <header class="second icon fa-bar-chart-o">
+                                        <h3>Administration Here</h3>
+                                        <p>Administration Portal</p>
+                                    </header>
+                                </section>
+                            </a>
                         </div>
                     </div>
                     <div class="row" style="padding-top:20px !important;">
@@ -487,5 +500,6 @@
     </div>
     </div>
     @RenderSection("scripts", required: false)
+	<!-- Go to www.addthis.com/dashboard to customize your tools --> <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4fa0ee7f0312e67c"></script>
 </body>
 </html>

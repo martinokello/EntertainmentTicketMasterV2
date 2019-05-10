@@ -1,0 +1,16 @@
+C:\Development\MartinLayooIncMvc\EntertainmentTicketMaster\Twitter\bin\Debug\Twitter.dll
+C:\Development\MartinLayooIncMvc\EntertainmentTicketMaster\Twitter\bin\Debug\Twitter.pdb
+C:\Development\MartinLayooIncMvc\EntertainmentTicketMaster\Twitter\bin\Debug\Newtonsoft.Json.dll
+C:\Development\MartinLayooIncMvc\EntertainmentTicketMaster\Twitter\bin\Debug\Newtonsoft.Json.xml
+C:\Development\MartinLayooIncMvc\EntertainmentTicketMaster\Twitter\obj\Debug\Twitter.dll
+C:\Development\MartinLayooIncMvc\EntertainmentTicketMaster\Twitter\obj\Debug\Twitter.pdb
+C:\Development\MartinLayooIncMvc\EntertainmentTicketMaster\Twitter\obj\Debug\Twitter.csprojResolveAssemblyReference.cache
+C:\Development\EntertainmentTicketMaster\Twitter\bin\Debug\Twitter.dll
+C:\Development\EntertainmentTicketMaster\Twitter\bin\Debug\Twitter.pdb
+C:\Development\EntertainmentTicketMaster\Twitter\bin\Debug\Newtonsoft.Json.dll
+C:\Development\EntertainmentTicketMaster\Twitter\bin\Debug\Newtonsoft.Json.xml
+C:\Development\EntertainmentTicketMaster\Twitter\obj\Debug\Twitter.csproj.CoreCompileInputs.cache
+C:\Development\EntertainmentTicketMaster\Twitter\obj\Debug\Twitter.csproj.CopyComplete
+C:\Development\EntertainmentTicketMaster\Twitter\obj\Debug\Twitter.dll
+C:\Development\EntertainmentTicketMaster\Twitter\obj\Debug\Twitter.pdb
+C:\Development\EntertainmentTicketMaster\Twitter\obj\Debug\Twitter.csprojAssemblyReference.cache

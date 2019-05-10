@@ -1,0 +1,11 @@
+C:\Development\MartinLayooIncMvc\EntertainmentTicketMaster\EmailServices\bin\Debug\EmailServices.dll
+C:\Development\MartinLayooIncMvc\EntertainmentTicketMaster\EmailServices\bin\Debug\EmailServices.pdb
+C:\Development\MartinLayooIncMvc\EntertainmentTicketMaster\EmailServices\obj\Debug\EmailServices.dll
+C:\Development\MartinLayooIncMvc\EntertainmentTicketMaster\EmailServices\obj\Debug\EmailServices.pdb
+C:\Development\MartinLayooIncMvc\EntertainmentTicketMaster\EmailServices\obj\Debug\EmailServices.csprojResolveAssemblyReference.cache
+C:\Development\EntertainmentTicketMaster\EmailServices\bin\Debug\EmailServices.dll
+C:\Development\EntertainmentTicketMaster\EmailServices\bin\Debug\EmailServices.pdb
+C:\Development\EntertainmentTicketMaster\EmailServices\obj\Debug\EmailServices.csproj.CoreCompileInputs.cache
+C:\Development\EntertainmentTicketMaster\EmailServices\obj\Debug\EmailServices.dll
+C:\Development\EntertainmentTicketMaster\EmailServices\obj\Debug\EmailServices.pdb
+C:\Development\EntertainmentTicketMaster\EmailServices\obj\Debug\EmailServices.csprojAssemblyReference.cache

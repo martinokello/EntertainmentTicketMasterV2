@@ -21,6 +21,86 @@
         float: left;
     }
 </style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var map;
+        var geocoder;
+        var poly= [];
+        var lin ;
+        // Draw a circle on map around center (radius in miles)
+        // Modified by Jeremy Schneider based on https://maps.huge.info/dragcircle2.htm
+        function drawCircle(map, center, radius, numPoints) {
+            poly = [];
+            var lat = parseFloat(center.lat);
+            var lng = parseFloat(center.lng);
+            var d2r = Math.PI / 180; // degrees to radians
+            var r2d = 180 / Math.PI; // radians to degrees
+            var Clat = (radius / 3963) * r2d; // using 3963 as earth's radius
+            var Clng = Clat / Math.cos(lat * d2r);
+            //Add each point in the circle
+            for (var i = 0; i < numPoints; i++) {
+                var theta = Math.PI * (i / (numPoints / 2));
+                let Cx = lng + (Clng * Math.cos(theta));
+                let Cy = lat + (Clat * Math.sin(theta));
+                poly.push(new google.maps.LatLng('' + Cy, '' + Cx));
+            }
+            //Remove the old line if it exists
+            if (line) {
+                map.removeOverlay(line);
+            }
+            //Add the first point to complete the circle
+            poly.push(poly[0]);
+            //Create a line with teh points from poly, red, 3 pixels wide, 80% opaque
+            line = new google.maps.Polyline(poly, '#FF0000', 3, 0.5);
+            map.addOverlay(line);
+        }
+
+        function initialize() {
+            geocoder = new google.maps.Geocoder();
+
+            showAddress("London, St. Johns Terrace W10 4RB");
+        }
+        function showAddress(address) {
+            geocoder.geocode({ 'address': address }, function (results, status) {
+                if (status != google.maps.GeocoderStatus.OK) {
+                    alert(address + " not found");
+                }
+                else {
+                    var myOptions = {
+                        zoom: 15,
+                        center: results[0].geometry.location,
+                        mapTypeControl: true,
+                        mapTypeControlOptions: { style: google.maps.MapTypeControlStyle.DROPDOWN_MENU },
+                        navigationControl: true,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+
+                    map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+                    map.setCenter(results[0].geometry.location);
+
+                    var infowindow = new google.maps.InfoWindow(
+                        {
+                            content: '<b>' + address + '</b>',
+                            size: new google.maps.Size(150, 50)
+                        });
+                    var address = "London, St. Johns Terrace W10 4RB";
+                    var marker = new google.maps.Marker({
+                        position: results[0].geometry.location,
+                        map: map,
+                        title: address
+                    });
+                    //drawCircle(map, results[0].geometry.location, 2.5, 40);
+
+                    google.maps.event.addListener(marker, 'click', function () {
+                        infowindow.open(map, marker);
+                    });
+                }
+            });
+        }
+        initialize();
+    });
+</script>
 <div class="body-content" style="text-align:left !important;background-color: #F0F0F0;margin-top:40px !important; width:100% !important;">
     <div style="padding-left: 10px; margin-top: 20px !important;">
         @using (@Html.BeginForm("SubmitEmail", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -51,13 +131,13 @@
                             Please Note: You should be logged in to make contact, otherwise your email won't be sent
                         </div>
                         <div style="width: 100%;">
-                            <input name="emailFrom" type="text" placeholder="your email address" style="font-weight: bold; width: 100%; color: #000040" /><br /><br />
+                            <input name="emailFrom" type="email" placeholder="your email address" style="font-weight: bold; width: 100%; color: #000040" /><br /><br />
 
-                            <input name="emailTo" type="text" placeholder="to email addresses separated by commas" style="font-weight: bold; width: 100%; color: #000040" /><br /><br />
+                            <input name="emailTo" type="email" placeholder="to email addresses separated by commas" style="font-weight: bold; width: 100%; color: #000040" /><br /><br />
 
                             <input name="emailSubject" type="text" placeholder="subject" style="font-weight: bold; width: 100%;color: #000040;" /><br /><br />
 
-                            <input type="file" name="attachment" value="Attach file" ngModel #attachment="ngModel" id="attachment" /><br /><br />
+                            <input type="file" name="attachment" value="Attach file" id="attachment" /><br /><br />
                         </div>
                         <div style="width: 98%;">
                             <textarea name="emailBody" id="MessageText" placeholder="Enter your post here" style="font-weight: bold;width:100%; height:50vh !important;color: #000040" autofocus></textarea>
@@ -84,5 +164,5 @@
                 <div style="clear:both;">&nbsp;</div>
             </div>
         }
-        </div>
+    </div>
 </div>
