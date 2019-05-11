@@ -68,35 +68,30 @@
 
 <div class="body-content" id="body-content" style="text-align:left !important; width:100% !important;">
     <div id="eventsContent">
-        <h2>Shows</h2>
-        <h3>We Have Free Templates for Everyone</h3>
+        <h2>Shows Coming Soon</h2>
         <ul style="float:left;">
             <li style="border: gray solid 1px;">
                 <h3>Be Part of Our Community</h3>
-                Our website templates are created with inspiration, checked for quality and originality and meticulously sliced and coded. What’s more, they're absolutely free! You can do a lot with them. You can modify them. You can use them to design websites for clients, so long as you agree with the <a href="https://www.freewebsitetemplates.com/about/terms">Terms of Use</a>. You can even remove all our links if you want to.
-            </li>
+MartinLayooInc Entertainment Master formerly known as Abalo Entertainment Master, was developed by Martin Alex Okello under © MartinLayooInc Copyright. It is where tickets of all events around the UK are sold by many independent event handlers and dealers. You get the statistics, ticket user journeys to their destinations and most of all the ease of ordering and arranging orders of event tickets in once place. Reporting and Statistics of sales can be obtained too from this online vending machine so to say. Lets you rest in peace knowing yuour tickets will be sold altogether.            </li>
         </ul>
-        <ul style="float:left; width:650px;">
-            @foreach (var evnt in Model)
-            {
-                <li style="border: gray solid 1px;">
-                    <p style="text-align: center;">
-                        <a href="@Url.Action("EventInfo","Tickets", new { id = evnt.EventId})">
-                            @evnt.EventName<br />
-                            <img class="alignVerticalImage" src="@Url.Content("~/images/Diamond"+index+".jpg")" />
-                        </a>
-                    </p>
-                    <p>@evnt.EventDescription</p>
-                </li>
-                index++;
-                if (index % 5 == 0)
-                {
-                    index = 1;
-                }
-            }
-
-
-        </ul>
-        <div style="clear:both;"><br /></div>
+		<div class="row" style="clear:both;margin-top:10px !important;">
+			@foreach (var evnt in Model)
+			{
+				<div style="border: gray solid 1px;" class="col-lg-4">
+					<p style="text-align: center;">
+						<a href="@Url.Action("EventInfo","Tickets", new { id = evnt.EventId})">
+							@evnt.EventName<br />
+							<img class="alignVerticalImage" src="@Url.Content("~/images/Diamond"+index+".jpg")" />
+						</a>
+					</p>
+					<p>@evnt.EventDescription</p>
+				</div>
+				index++;
+				if (index % 5 == 0)
+				{
+					index = 1;
+				}
+			}
+		</div>
     </div>
 </div>
