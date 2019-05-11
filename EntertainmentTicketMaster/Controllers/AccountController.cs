@@ -113,7 +113,7 @@ namespace EntertainmentTicketMaster.Controllers
             if (user == null) ModelState.AddModelError("userNotExist", "User doesn't exist.");
             if (ModelState.IsValid)
             {
-                var aspNetUser = user.AspNetUser;
+                var aspNetUser = _repositoryServices.GetUserByName(model.UserName);
 
                 var autoPassword = model.UserName + (new Random(DateTime.Now.Millisecond)).NextDouble();
                 UserManager.RemovePassword(user.ASPNetUserId);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Configuration;
 using System.Text;
 using System.Threading.Tasks;
 using EmailServices.EmailDomain;
@@ -22,7 +23,8 @@ namespace EmailServices
         public void SendEmail(TicketMasterEmailMessage message)
         {
             MailMessage mailMessage = new MailMessage();
-            mailMessage.From = new MailAddress(message.EmailFrom);
+            mailMessage.From = new MailAddress(ConfigurationManager.AppSettings["SmtpUsername"]);
+            mailMessage.Subject = string.Format("Message From: {0}, {1}",mailMessage.From, mailMessage.Subject);
             foreach(var to in message.EmailTo)
             {
                 mailMessage.To.Add(new MailAddress(to));
@@ -32,7 +34,7 @@ namespace EmailServices
 
             mailMessage.Subject = message.Subject;
             mailMessage.Body = message.EmailMessage;
-            _smtpServer.Credentials = new NetworkCredential("business-enterprise@martinlayooinc.co.uk", "eps1LonX!505First14Chars");
+            _smtpServer.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["SmtpUsername"], ConfigurationManager.AppSettings["SmtpPassweord"]);
 
             _smtpServer.Send(mailMessage);
         }
