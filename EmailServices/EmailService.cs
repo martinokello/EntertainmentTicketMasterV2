@@ -31,6 +31,10 @@ namespace EmailServices
             }
             if (!string.IsNullOrEmpty(message.AttachmentFilePath))
                 mailMessage.Attachments.Add(new Attachment(message.AttachmentFilePath));
+            else if(message.AttachmentStream != null)
+            {
+                mailMessage.Attachments.Add(new Attachment(message.AttachmentStream, message.AttachedFileName));
+            }
 
             mailMessage.Subject = message.Subject;
             mailMessage.Body = message.EmailMessage;

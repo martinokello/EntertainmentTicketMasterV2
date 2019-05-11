@@ -71,13 +71,13 @@ namespace EntertainmentTicketMaster.Controllers
         }
         [Authorize()]
         [HttpPost]
-        public ActionResult SendEmail()
+        public ActionResult SendEmail(HttpPostedFileBase fileBase)
         {
             try { 
                 //Send Email:
               var emailTo = new List<string>();
                 emailTo.AddRange(Request.Form["emailTo"].Split(new char[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries));
-                _emailService.SendEmail(new EmailServices.EmailDomain.TicketMasterEmailMessage { EmailFrom = Request.Form["emailFrom"] , EmailTo= emailTo, Subject = Request.Form["emailSubject"], EmailMessage = Request.Form["emailBody"] });
+                _emailService.SendEmail(new EmailServices.EmailDomain.TicketMasterEmailMessage { EmailFrom = Request.Form["emailFrom"] , EmailTo= emailTo, Subject = Request.Form["emailSubject"], EmailMessage = Request.Form["emailBody"], AttachmentStream= fileBase.InputStream, AttachedFileName = fileBase.FileName });
                 return View("Index");
             }
             catch (Exception e)

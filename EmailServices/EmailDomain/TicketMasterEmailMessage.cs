@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace EmailServices.EmailDomain
@@ -13,5 +14,7 @@ namespace EmailServices.EmailDomain
         public string EmailFrom { get; set; }
         public string AttachmentFilePath { get; set; }
         public string Subject { get; set; }
+        public string AttachedFileName { get; set; }
+        public Stream AttachmentStream { get; set; }
     }
 }
