@@ -23,7 +23,7 @@ namespace EmailServices
         public void SendEmail(TicketMasterEmailMessage message)
         {
             MailMessage mailMessage = new MailMessage();
-            mailMessage.From = new MailAddress(ConfigurationManager.AppSettings["SmtpUsername"]);
+            mailMessage.From = new MailAddress(ConfigurationManager.AppSettings["BusinessEmail"]);
             mailMessage.Subject = string.Format("Message From: {0}, {1}",mailMessage.From, mailMessage.Subject);
             foreach(var to in message.EmailTo)
             {
@@ -34,7 +34,7 @@ namespace EmailServices
 
             mailMessage.Subject = message.Subject;
             mailMessage.Body = message.EmailMessage;
-            _smtpServer.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["SmtpUsername"], ConfigurationManager.AppSettings["SmtpPassweord"]);
+            _smtpServer.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["BusinessEmail"], ConfigurationManager.AppSettings["SmtpPassword"]);
 
             _smtpServer.Send(mailMessage);
         }
