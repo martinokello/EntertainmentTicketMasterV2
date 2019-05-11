@@ -71,18 +71,18 @@ namespace EntertainmentTicketMaster.Controllers
         }
         [Authorize()]
         [HttpPost]
-        public ActionResult SendEmail(HttpPostedFileBase fileBase)
+        public ActionResult SendEmail([System.Web.Http.FromBody]  HttpPostedFileBase attachment)
         {
             try { 
                 //Send Email:
               var emailTo = new List<string>();
                 emailTo.AddRange(Request.Form["emailTo"].Split(new char[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries));
-                _emailService.SendEmail(new EmailServices.EmailDomain.TicketMasterEmailMessage { EmailFrom = Request.Form["emailFrom"] , EmailTo= emailTo, Subject = Request.Form["emailSubject"], EmailMessage = Request.Form["emailBody"], AttachmentStream= fileBase.InputStream, AttachedFileName = fileBase.FileName });
+                _emailService.SendEmail(new EmailServices.EmailDomain.TicketMasterEmailMessage { EmailFrom = Request.Form["emailFrom"] , EmailTo= emailTo, Subject = Request.Form["emailSubject"], EmailMessage = Request.Form["emailBody"], AttachmentStream= attachment.InputStream, AttachedFileName = attachment.FileName });
                 return View("Index");
             }
             catch (Exception e)
             {
-                return Json(new { Result = false });
+                return Json(new { Result = false, Message = e.Message, StackTracke = e.StackTrace });
             }
         }
     }
