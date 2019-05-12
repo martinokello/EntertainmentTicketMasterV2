@@ -77,7 +77,7 @@ namespace EntertainmentTicketMaster.Controllers
                 //Send Email:
               var emailTo = new List<string>();
                 emailTo.AddRange(Request.Form["emailTo"].Split(new char[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries));
-                _emailService.SendEmail(new EmailServices.EmailDomain.TicketMasterEmailMessage { EmailFrom = Request.Form["emailFrom"] , EmailTo= emailTo, Subject = Request.Form["emailSubject"], EmailMessage = Request.Form["emailBody"], AttachmentStream= attachment.InputStream, AttachedFileName = attachment.FileName });
+                _emailService.SendEmail(new EmailServices.EmailDomain.TicketMasterEmailMessage { EmailFrom = Request.Form["emailFrom"] , EmailTo= emailTo, Subject = Request.Form["emailSubject"], EmailMessage = Request.Form["emailBody"],  AttachmentStream = (attachment!=null? attachment.InputStream: null ), AttachedFileName = (attachment != null ? attachment.FileName : null) });
                 return View("Index");
             }
             catch (Exception e)
