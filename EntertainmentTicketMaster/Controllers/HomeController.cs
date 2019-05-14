@@ -17,9 +17,10 @@ namespace EntertainmentTicketMaster.Controllers
     public class HomeController : Controller
     {
         EmailService _emailService;
-        public HomeController()
+        public HomeController(IEmailService emailService)
         {
-            _emailService = new EmailService(ConfigurationManager.AppSettings["SmtpHostServer"]);
+            _emailService = emailService;
+            _emailService.SmtpServer = ConfigurationManager.AppSettings["SmtpHostServer"];
         }
         public ActionResult Index()
         {
