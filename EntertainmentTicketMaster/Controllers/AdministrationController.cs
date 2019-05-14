@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -24,14 +25,13 @@ namespace EntertainmentTicketMaster.Controllers
         private RepositoryAdminServices _repositoryAdminServices;
         private IEmailService _emailService;
 
-        public AdministrationController(IRepositoryTicketServiceSegregator repositoryTicketServices, IRepositoryAdminServiceSegregator repositoryAdminService)
+        public AdministrationController(IRepositoryTicketServiceSegregator repositoryTicketServices, IRepositoryAdminServiceSegregator repositoryAdminService, IEmailService emailService)
         {
             _repositoryTicketServices = repositoryTicketServices as RepositoryTicketServices;
             _repositoryAdminServices = repositoryAdminService as RepositoryAdminServices;
-
-
-            var smtpHostServer = System.Configuration.ConfigurationManager.AppSettings["SmtpHostServer"];
-            _emailService = new EmailService(smtpHostServer);
+            
+            _emailService = emailService as EmailService;
+            _emailService.EmailSmtpService = ConfigurationManager.AppSettings["SmtpHostServer"];
         }
 
         public ActionResult Index()

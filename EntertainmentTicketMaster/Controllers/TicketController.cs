@@ -5,6 +5,8 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using EmailServices;
+using EmailServices.Interfaces;
 using EntertainmentTicketMaster.Models;
 using RepositoryServices.Services;
 using TicketMasterDataAccess.DataAccess;
@@ -16,11 +18,13 @@ namespace EntertainmentTicketMaster.Controllers
     {
         private RepositoryTicketServices _repositoryTicketServices;
         private RepositoryAdminServices _repositoryAdminServices;
-
-        public TicketsController(IRepositoryTicketServiceSegregator repositoryTicketServices, IRepositoryAdminServiceSegregator repositoryAdminServices)
+        private EmailService _emailService;
+        public TicketsController(IRepositoryTicketServiceSegregator repositoryTicketServices, IRepositoryAdminServiceSegregator repositoryAdminServices, IEmailService emailService)
         {
             _repositoryTicketServices = repositoryTicketServices as RepositoryTicketServices;
             _repositoryAdminServices = repositoryAdminServices as RepositoryAdminServices;
+            _emailService = emailService as EmailService;
+            _emailService.EmailSmtpService = ConfigurationManager.AppSettings["SmtpHostServer"];
         }
         //
         // GET: /Ticket/
