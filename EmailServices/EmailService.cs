@@ -19,7 +19,7 @@ namespace EmailServices
         {
             _smtpServer = new SmtpClient(smtpHostServer);
         }
-        public string EmailService{get;set;}
+        public string EmailSmtpService{get;set;}
         public void SendEmail(TicketMasterEmailMessage message)
         {
             MailMessage mailMessage = new MailMessage();

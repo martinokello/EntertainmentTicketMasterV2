@@ -7,6 +7,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using EmailServices;
+using EmailServices.Interfaces;
 using RepositoryServices.Services;
 using TicketMasterDataAccess.ConcreteRepositories;
 using TicketMasterDataAccess.UnitOfWork;
@@ -19,8 +20,8 @@ namespace EntertainmentTicketMaster.Controllers
         EmailService _emailService;
         public HomeController(IEmailService emailService)
         {
-            _emailService = emailService;
-            _emailService.SmtpServer = ConfigurationManager.AppSettings["SmtpHostServer"];
+            _emailService = emailService as EmailService;
+            _emailService.EmailSmtpService = ConfigurationManager.AppSettings["SmtpHostServer"];
         }
         public ActionResult Index()
         {
