@@ -10,5 +10,6 @@ namespace EmailServices.Interfaces
     public interface IEmailService
     {
         void SendEmail(TicketMasterEmailMessage message);
+        public string EmailService{get;set;}
     }
 }
