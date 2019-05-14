@@ -19,12 +19,11 @@ namespace EntertainmentTicketMaster.Controllers
         private RepositoryTicketServices _repositoryTicketServices;
         private RepositoryAdminServices _repositoryAdminServices;
         private EmailService _emailService;
-        public TicketsController(IRepositoryTicketServiceSegregator repositoryTicketServices, IRepositoryAdminServiceSegregator repositoryAdminServices, IEmailService emailService)
+        public TicketsController(IRepositoryTicketServiceSegregator repositoryTicketServices, IRepositoryAdminServiceSegregator repositoryAdminServices, EmailService emailService)
         {
             _repositoryTicketServices = repositoryTicketServices as RepositoryTicketServices;
             _repositoryAdminServices = repositoryAdminServices as RepositoryAdminServices;
             _emailService = emailService as EmailService;
-            _emailService.EmailSmtpService = ConfigurationManager.AppSettings["SmtpHostServer"];
         }
         //
         // GET: /Ticket/

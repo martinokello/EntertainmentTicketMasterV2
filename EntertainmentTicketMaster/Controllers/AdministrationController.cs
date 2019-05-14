@@ -25,13 +25,12 @@ namespace EntertainmentTicketMaster.Controllers
         private RepositoryAdminServices _repositoryAdminServices;
         private IEmailService _emailService;
 
-        public AdministrationController(IRepositoryTicketServiceSegregator repositoryTicketServices, IRepositoryAdminServiceSegregator repositoryAdminService, IEmailService emailService)
+        public AdministrationController(IRepositoryTicketServiceSegregator repositoryTicketServices, IRepositoryAdminServiceSegregator repositoryAdminService, EmailService emailService)
         {
             _repositoryTicketServices = repositoryTicketServices as RepositoryTicketServices;
             _repositoryAdminServices = repositoryAdminService as RepositoryAdminServices;
             
             _emailService = emailService as EmailService;
-            _emailService.EmailSmtpService = ConfigurationManager.AppSettings["SmtpHostServer"];
         }
 
         public ActionResult Index()

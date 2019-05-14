@@ -1,3 +1,4 @@
+using System.Configuration;
 using System.Web.Mvc;
 using EmailServices;
 using EmailServices.Interfaces;
@@ -24,7 +25,7 @@ namespace EntertainmentTicketMaster
             container.RegisterType<IRepositoryTicketServiceSegregator, RepositoryTicketServices>();
             container.RegisterType<IAccontManagerServiceSegregator, AccountManagementServices>();
             container.RegisterType<IRepositoryAdminServiceSegregator, RepositoryAdminServices>();
-            container.RegisterType<IEmailService, EmailService>();
+            container.RegisterType<EmailService>(new InjectionConstructor(ConfigurationManager.AppSettings["SmtpHostServer"]));
             container.RegisterType<IUnitOfWork, UnitOfWork>();
             container.RegisterType<IUserRepositorySegregator, UserRepository>();
             container.RegisterType<ITicketRepositorySegregator, TicketRepository>();

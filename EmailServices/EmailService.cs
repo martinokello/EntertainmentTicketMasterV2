@@ -14,7 +14,6 @@ namespace EmailServices
     public class EmailService:IEmailService
     {
         private SmtpClient _smtpServer;
-
         public EmailService(string smtpHostServer)
         {
             _smtpServer = new SmtpClient(smtpHostServer);
