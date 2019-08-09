@@ -1,26 +1,7 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
-<style type="text/css">
-    div.body-content div, div.body-content, div {
-        color: gray;
-    }
 
-    #body.home div div, #body.home div div:first-child {
-        float: left;
-    }
-
-    .form-control {
-        width: 250px;
-        float: left;
-    }
-
-    .control-label {
-        width: 150px;
-        text-align: right;
-        float: left;
-    }
-</style>
 <script type="text/javascript">
     $(document).ready(function () {
         var map;
@@ -101,11 +82,11 @@
         initialize();
     });
 </script>
-<div class="body-content" style="text-align:left !important;background-color: #F0F0F0;margin-top:40px !important; width:100% !important;">
+<div style="text-align:left !important;margin-top:40px !important; width:100% !important;">
     <div style="padding-left: 10px; margin-top: 20px !important;">
         @using (@Html.BeginForm("SendEmail", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
-            <div>
+            <div style="padding-top: 10px; width:100%;">
                 <label id="ContactUsDetails" style="width: 100%; margin-left: 0px; font-weight: bolder; font-size: Small; color: #AD0000;">Contact MartinLayooInc Software Solutions</label>
             </div>
             <div style="padding-top: 10px; width:100%;">

@@ -53,12 +53,9 @@
                         <div>&nbsp;</div>
                     </div>
                     <div class="form-group">
-                        <div class="col-lg-offset-3 col-lg-9">
-                            <div class="checkbox">
-                                @Html.CheckBoxFor(m => m.RememberMe)
-                                @Html.LabelFor(m => m.RememberMe)
-                            </div>
-                        </div><div>&nbsp;</div>
+						@Html.LabelFor(m => m.RememberMe, new {@class="col-lg-3  control-label"})<span style="float:left;">&nbsp;</span>
+						@Html.CheckBoxFor(m => m.RememberMe, new { @style="-webkit-appearance:checkbox !important;", @class="col-lg-1 checkbox"})
+                        <div>&nbsp;</div>
                     </div>
                     <div class="form-group">
                         <div>&nbsp;</div>

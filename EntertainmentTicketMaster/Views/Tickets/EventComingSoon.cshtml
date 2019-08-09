@@ -5,42 +5,10 @@
 }
 
 <style type="text/css">
-    #body.home div div:first-child ul li:first-child {
-        width: 238px;
-    }
 
-    #body.home div div:first-child ul li {
-        border-right: 1px solid #4f4f4f;
-        min-height: 287px;
-        padding: 0;
-        width: 239px;
+    a {
+        color: #ae6662;
     }
-
-    div.body-content div, div.body-content {
-        color: gray;
-    }
-
-    #body.home div div, #body.home div div:first-child {
-        float: left;
-        width: 960px;
-    }
-
-    .alignVerticalImage {
-        vertical-align: central;
-        height: 95%;
-    }
-
-    .form-control {
-        width: 250px;
-        float: left;
-    }
-
-    .control-label {
-        width: 150px;
-        text-align: right;
-        float: left;
-    }
-
 
     div#eventsContent ul li p a img {
         border-bottom: 1px solid #4F4F4F;
@@ -69,29 +37,32 @@
 <div class="body-content" id="body-content" style="text-align:left !important; width:100% !important;">
     <div id="eventsContent">
         <h2>Shows Coming Soon</h2>
-        <ul style="float:left;">
-            <li style="border: gray solid 1px;">
-                <h3>Be Part of Our Community</h3>
-MartinLayooInc Entertainment Master formerly known as Abalo Entertainment Master, was developed by Martin Alex Okello under © MartinLayooInc Copyright. It is where tickets of all events around the UK are sold by many independent event handlers and dealers. You get the statistics, ticket user journeys to their destinations and most of all the ease of ordering and arranging orders of event tickets in once place. Reporting and Statistics of sales can be obtained too from this online vending machine so to say. Lets you rest in peace knowing yuour tickets will be sold altogether.            </li>
-        </ul>
-		<div class="row" style="clear:both;margin-top:10px !important;">
-			@foreach (var evnt in Model)
-			{
-				<div style="border: gray solid 1px;" class="col-lg-4">
-					<p style="text-align: center;">
-						<a href="@Url.Action("EventInfo","Tickets", new { id = evnt.EventId})">
-							@evnt.EventName<br />
-							<img class="alignVerticalImage" src="@Url.Content("~/images/Diamond"+index+".jpg")" />
-						</a>
-					</p>
-					<p>@evnt.EventDescription</p>
-				</div>
-				index++;
-				if (index % 5 == 0)
-				{
-					index = 1;
-				}
-			}
-		</div>
+        <div style="margin:10px 0px !important; width:100%;">
+            <div style="border: gray solid 1px;">
+                <h3 style="padding:10px;">Be Part of Our Community</h3>
+                <div style="padding:10px;">
+                    MartinLayooInc Entertainment Master formerly known as Abalo Entertainment Master, was developed by Martin Alex Okello under © MartinLayooInc Copyright. It is where tickets of all events around the UK are sold by many independent event handlers and dealers. You get the statistics, ticket user journeys to their destinations and most of all the ease of ordering and arranging orders of event tickets in once place. Reporting and Statistics of sales can be obtained too from this online vending machine so to say. Lets you rest in peace knowing yuour tickets will be sold altogether.
+                </div>
+            </div>
+        </div>
+        <div id="eventsContent" style="margin:10px 0px !important; width:100%;">
+            @foreach (var evnt in Model)
+            {
+                <div style="border: gray solid 1px;" class="col-lg-4">
+                    <p style="text-align: center;">
+                        <a href="@Url.Action("EventInfo","Tickets", new { id = evnt.EventId})">
+                            @evnt.EventName<br />
+                            <img class="alignVerticalImage" src="@Url.Content("~/images/Diamond"+index+".jpg")" />
+                        </a>
+                    </p>
+                    <p>@evnt.EventDescription</p>
+                </div>
+                index++;
+                if (index % 5 == 0)
+                {
+                    index = 1;
+                }
+            }
+        </div>
     </div>
 </div>
