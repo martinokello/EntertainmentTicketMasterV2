@@ -144,6 +144,11 @@ namespace RepositoryServices.Services
         {
             return _bookingRepository.GetBookingsByEvent(fro, to);
         }
+
+        public void DeleteEvent(int eventId)
+        {
+            _eventRepository.Delete(eventId);
+        }
     }
 
     public interface IRepositoryTicketServiceSegregator

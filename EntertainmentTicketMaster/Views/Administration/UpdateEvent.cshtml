@@ -112,9 +112,10 @@
                 </div>
                 @Html.HiddenFor(p => p.EventId);
                 <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" class="btn btn-default" value="Update Event" />
-                    </div>
+                    <div class="col-md-offset-2">
+                        <input type="submit" class="btn btn-default col-md-2" value="UpdateEvent"/>
+                        <input type="submit" class="btn btn-default col-md-2" value="DeleteEvent" />
+                    </div>                   
                 </div>
             }
         </div>

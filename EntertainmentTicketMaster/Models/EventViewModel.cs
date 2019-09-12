@@ -33,5 +33,8 @@ namespace EntertainmentTicketMaster.Models
         public decimal Price { get; set; }
 
         public HttpPostedFileBase Attachment { get; set; }
+
+        public string UpdateEvent { get; set; }
+        public string DeleteEvent { get; set; }
     }
 }

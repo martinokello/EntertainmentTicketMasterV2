@@ -137,56 +137,69 @@ namespace EntertainmentTicketMaster.Controllers
 
             return View(viewModel);
         }
+        private void DeleteEvent(int eventId)
+        {
+            _repositoryTicketServices.DeleteEvent(eventId);
+        }
 
         [HttpPost]
         public ActionResult UpdateEvent(EventViewModel model)
         {
             try
             {
-                var time = model.EventTime;
-                var regex = new Regex(@"^(?:[01][0-9]|2[0-3]):[0-5][0-9]$");
-                if (!regex.IsMatch(time))
+                if (!string.IsNullOrEmpty(model.UpdateEvent))
                 {
-                    ModelState.AddModelError("timeWrong", "the time format should be hh:mm");
+                    var time = model.EventTime;
+                    var regex = new Regex(@"^(?:[01][0-9]|2[0-3]):[0-5][0-9]$");
+                    if (!regex.IsMatch(time))
+                    {
+                        ModelState.AddModelError("timeWrong", "the time format should be hh:mm");
+                    }
+                    if (ModelState.IsValid)
+                    {
+                        var eventDate = model.EventDate.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0] + " " + time;
+                        var actualEventDate = DateTime.ParseExact(eventDate, "dd/MM/yyyy HH:mm", new CultureInfo("en-GB"));
+                        var attachemntPath = string.Empty;
+
+                        if (model.Attachment != null)
+                        {
+                            var attachment = model.Attachment;
+
+                            var binaryReader = new BinaryReader(attachment.InputStream);
+                            var fileBytes = binaryReader.ReadBytes(attachment.ContentLength);
+
+                            attachemntPath = Server.MapPath("/EventEmailAttachments/" + attachment.FileName);
+
+                            var fileInfo = new FileInfo(attachemntPath);
+
+                            var fileStream = fileInfo.Create();
+                            fileStream.Write(fileBytes, 0, fileBytes.Length);
+                        }
+                        var evnt = new Event
+                        {
+                            EventId = model.EventId,
+                            EventDate = actualEventDate,
+                            EventName = model.EventName,
+                            EventDescription = model.EventDescription,
+                            Location = model.Location,
+                            PricePerTicket = model.Price,
+                            NumberOfTickets = model.NumberOfTickets
+                        };
+
+                        if (_repositoryAdminServices.UpdateEvent(evnt))
+                        {
+                            return RedirectToAction("Events", "Tickets");
+                        }
+                        ModelState.AddModelError("eventError", "An error occured. Please inform your administrator!");
+                        return View("UpdateEvent", model);
+                    }
                 }
-                if (ModelState.IsValid)
+                else
                 {
-                    var eventDate = model.EventDate.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0] + " " + time;
-                    var actualEventDate = DateTime.ParseExact(eventDate, "dd/MM/yyyy HH:mm", new CultureInfo("en-GB"));
-                    var attachemntPath = string.Empty;
-
-                    if (model.Attachment != null)
-                    {
-                        var attachment = model.Attachment;
-
-                        var binaryReader = new BinaryReader(attachment.InputStream);
-                        var fileBytes = binaryReader.ReadBytes(attachment.ContentLength);
-
-                        attachemntPath = Server.MapPath("/EventEmailAttachments/" + attachment.FileName);
-
-                        var fileInfo = new FileInfo(attachemntPath);
-
-                        var fileStream = fileInfo.Create();
-                        fileStream.Write(fileBytes, 0, fileBytes.Length);
-                    }
-                    var evnt = new Event
-                    {
-                        EventId = model.EventId,
-                        EventDate = actualEventDate,
-                        EventName = model.EventName,
-                        EventDescription = model.EventDescription,
-                        Location = model.Location,
-                        PricePerTicket = model.Price,
-                        NumberOfTickets = model.NumberOfTickets
-                    };
-
-                    if (_repositoryAdminServices.UpdateEvent(evnt))
-                    {
-                        return RedirectToAction("Events", "Tickets");
-                    }
-                    ModelState.AddModelError("eventError", "An error occured. Please inform your administrator!");
-                    return View("UpdateEvent", model);
+                    this.DeleteEvent(model.EventId);
+                    return View();
                 }
+
             }
             catch (Exception e)
             {
