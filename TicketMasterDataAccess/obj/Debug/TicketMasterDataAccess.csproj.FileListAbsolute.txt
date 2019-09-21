@@ -8,8 +8,9 @@ C:\Development\MartinLayooIncMvc\EntertainmentTicketMaster\TicketMasterDataAcces
 C:\Development\MartinLayooIncMvc\EntertainmentTicketMaster\TicketMasterDataAccess\obj\Debug\TicketMasterDataAccess.dll
 C:\Development\MartinLayooIncMvc\EntertainmentTicketMaster\TicketMasterDataAccess\obj\Debug\TicketMasterDataAccess.pdb
 C:\Development\MartinLayooIncMvc\EntertainmentTicketMaster\TicketMasterDataAccess\obj\Debug\TicketMasterDataAccess.csprojResolveAssemblyReference.cache
-C:\Development\EntertainmentTicketMaster\TicketMasterDataAccess\bin\Debug\TicketMasterDataAccess.dll.config
 C:\Development\EntertainmentTicketMaster\TicketMasterDataAccess\bin\Debug\TicketMasterDataAccess.dll
+C:\Development\EntertainmentTicketMaster\TicketMasterDataAccess\obj\Debug\TicketMasterDataAccess.pdb
+C:\Development\EntertainmentTicketMaster\TicketMasterDataAccess\bin\Debug\TicketMasterDataAccess.dll.config
 C:\Development\EntertainmentTicketMaster\TicketMasterDataAccess\bin\Debug\TicketMasterDataAccess.pdb
 C:\Development\EntertainmentTicketMaster\TicketMasterDataAccess\bin\Debug\EntityFramework.dll
 C:\Development\EntertainmentTicketMaster\TicketMasterDataAccess\bin\Debug\EntityFramework.SqlServer.dll
@@ -18,5 +19,4 @@ C:\Development\EntertainmentTicketMaster\TicketMasterDataAccess\bin\Debug\Entity
 C:\Development\EntertainmentTicketMaster\TicketMasterDataAccess\obj\Debug\TicketMasterDataAccess.csproj.CoreCompileInputs.cache
 C:\Development\EntertainmentTicketMaster\TicketMasterDataAccess\obj\Debug\TicketMasterDataAccess.csproj.CopyComplete
 C:\Development\EntertainmentTicketMaster\TicketMasterDataAccess\obj\Debug\TicketMasterDataAccess.dll
-C:\Development\EntertainmentTicketMaster\TicketMasterDataAccess\obj\Debug\TicketMasterDataAccess.pdb
 C:\Development\EntertainmentTicketMaster\TicketMasterDataAccess\obj\Debug\TicketMasterDataAccess.csprojAssemblyReference.cache

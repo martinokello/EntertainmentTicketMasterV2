@@ -18,10 +18,10 @@ C:\Development\EntertainmentTicketMaster\UPAEventsPayPal2\bin\RepositoryServices
 C:\Development\EntertainmentTicketMaster\UPAEventsPayPal2\bin\TicketMasterDataAccess.dll
 C:\Development\EntertainmentTicketMaster\UPAEventsPayPal2\bin\EmailServices.pdb
 C:\Development\EntertainmentTicketMaster\UPAEventsPayPal2\bin\RepositoryServices.pdb
-C:\Development\EntertainmentTicketMaster\UPAEventsPayPal2\bin\TicketMasterDataAccess.pdb
-C:\Development\EntertainmentTicketMaster\UPAEventsPayPal2\bin\TicketMasterDataAccess.dll.config
 C:\Development\EntertainmentTicketMaster\UPAEventsPayPal2\obj\Debug\UPAEventsPayPal2.csprojAssemblyReference.cache
 C:\Development\EntertainmentTicketMaster\UPAEventsPayPal2\obj\Debug\UPAEventsPayPal2.csproj.CoreCompileInputs.cache
 C:\Development\EntertainmentTicketMaster\UPAEventsPayPal2\obj\Debug\UPAEventsPayPal2.csproj.CopyComplete
 C:\Development\EntertainmentTicketMaster\UPAEventsPayPal2\obj\Debug\UPAEventsPayPal.dll
 C:\Development\EntertainmentTicketMaster\UPAEventsPayPal2\obj\Debug\UPAEventsPayPal.pdb
+C:\Development\EntertainmentTicketMaster\UPAEventsPayPal2\bin\TicketMasterDataAccess.pdb
+C:\Development\EntertainmentTicketMaster\UPAEventsPayPal2\bin\TicketMasterDataAccess.dll.config
